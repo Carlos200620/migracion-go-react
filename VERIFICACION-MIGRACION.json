@@ -1,0 +1,24 @@
+{
+  "frontendTests": 13,
+  "goUnitAndIntegrationTests": 3,
+  "postgresFlow": "passed: TEMP tables, public row counts unchanged",
+  "liveProxy": "React → Go → PostgreSQL",
+  "publicProjectsRead": 2,
+  "originalPDFsVerified": 2,
+  "livePublicPDFDownloadsVerified": 2,
+  "originalProjectUntouched": true,
+  "visualBrowserReview": "pending",
+  "improvements": {
+    "frontendTests": 27,
+    "goTestsWithPostgres": 6,
+    "temporaryTablesOnly": true,
+    "persistentSessions": "verified after rebuilding server instance",
+    "pagination": "verified with 205 projects",
+    "pdfPreview": "authorized bytes and revoke URL tested",
+    "notifications": "ownership and read status tested",
+    "mobile": "CSS and menu interaction tested; manual visual review pending",
+    "passwordRecovery": "token flow verified with simulated mailer; real SMTP configuration pending",
+    "migration": "003_improvements.sql applied",
+    "backup": "../respaldo-mejoras-20261103-6120d102"
+  }
+}

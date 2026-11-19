@@ -1,0 +1,11 @@
+import { Component, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+interface Publication {id:number;title:string;summary:string;objectives:string;authors:string;year:number;category:string;hasDocument:boolean;}
+@Component({selector:'app-publication',imports:[RouterLink],template:`<main class="publication"><a routerLink="/catalogo">← Volver al catálogo</a>@if(loading()){<p role="status">Cargando proyecto…</p>}@else if(error()){<p role="alert">{{ error() }}</p><button (click)="load()">Reintentar</button>}@else if(project();as p){<p class="eyebrow">{{ p.category }} · {{ p.year }}</p><h1>{{ p.title }}</h1><p>Autores: {{ p.authors }}</p><section><h2>Resumen</h2><p>{{ p.summary }}</p><h2>Objetivos</h2><p>{{ p.objectives }}</p>@if(p.hasDocument){<a class="download" [href]="'/api/projects/'+p.id+'/document'">Descargar PDF ↓</a>}@else{<p>No hay documento disponible.</p>}</section>}</main>`,styles:[`:host{display:block}.publication{max-width:1000px;margin:auto;padding:55px 24px;min-height:65vh}a{color:#123e31}h1{font:46px Georgia,serif;overflow-wrap:anywhere}h2{font:28px Georgia,serif}.eyebrow{font-size:12px;letter-spacing:2px;margin-top:40px}section{background:white;padding:28px;border:1px solid #d7e1dc;border-radius:14px;margin-top:28px}section p{line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}.download,button{display:inline-block;background:#123e31;color:white;border:0;padding:16px 22px;border-radius:8px;text-decoration:none;font:inherit;cursor:pointer}@media(max-width:600px){h1{font-size:34px}}`]})
+export class PublicationPage {
+ private readonly http=inject(HttpClient);private readonly id=inject(ActivatedRoute).snapshot.paramMap.get('id');
+ readonly project=signal<Publication|null>(null);readonly loading=signal(true);readonly error=signal('');constructor(){this.load();}
+ load(){this.loading.set(true);this.error.set('');this.http.get<Publication>(`/api/projects/${this.id}`).subscribe({next:p=>{this.project.set(p);this.loading.set(false);},error:e=>{this.loading.set(false);this.error.set(e.status===404?'El proyecto no existe o todavía no está publicado.':'No se pudo cargar el proyecto. Inténtalo nuevamente.');}});}
+}
+

@@ -1,0 +1,4 @@
+BEGIN;
+ALTER TABLE password_resets ADD COLUMN IF NOT EXISTS method varchar(10) NOT NULL DEFAULT 'link';
+ALTER TABLE password_resets ADD COLUMN IF NOT EXISTS attempts integer NOT NULL DEFAULT 0 CHECK(attempts BETWEEN 0 AND 5);
+COMMIT;

@@ -1,0 +1,8 @@
+**/node_modules/
+**/dist/
+.cache/
+**/.test-temp/
+**/.env
+**/uploads/
+*.exe
+**/credenciales-locales.txt

@@ -1,0 +1,12 @@
+@if (!isAuth) {<header class="site-header"><a routerLink="/" class="brand"><span class="logo">RP</span><span><strong>Repositorio de proyectos</strong><small>Comunidad académica</small></span></a><nav aria-label="Navegación principal"><a routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Inicio</a><a routerLink="/catalogo" routerLinkActive="nav-active">Catálogo</a><a class="nav-access" [routerLink]="auth.user() ? (auth.user()?.role === 'student' ? '/mis-proyectos' : '/administracion') : '/iniciar-sesion'">{{ auth.user() ? 'Mi cuenta' : 'Iniciar sesión' }}</a></nav></header>}
+<router-outlet />
+@if (!isAuth) {<footer class="site-footer"><div class="footer-content">
+ <a class="footer-brand" routerLink="/" aria-label="Repositorio de proyectos, volver al inicio"><span class="footer-logo">RP</span><span><strong>Repositorio de proyectos académicos</strong><small>Comunidad académica</small></span></a>
+ <p class="footer-purpose">Proyectos, aprendizaje y conocimiento compartido.</p>
+ <p class="footer-copyright">© {{ year }} Repositorio de proyectos · Uso académico</p>
+</div></footer>}
+
+
+
+
+

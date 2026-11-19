@@ -1,0 +1,17 @@
+{
+  "name": "repositorio-react-go",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/dev.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "node scripts/go.mjs run -buildvcs=false .",
+    "build": "npm --prefix frontend run build && node scripts/go.mjs build -buildvcs=false -o ../.cache/repositorio-api.exe .",
+    "test": "npm --prefix frontend test && node scripts/go.mjs test -buildvcs=false ./...",
+    "test:database": "node scripts/test-database.mjs",
+    "migrate": "node scripts/go.mjs run -buildvcs=false . -migrate",
+    "test:smoke": "node scripts/smoke.mjs"
+  }
+}
